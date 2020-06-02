@@ -162,7 +162,8 @@ The owner of the customer subscription is usually the reseller
 
 ## Modify a subscription
 * Http method : PUT
-* Url : https://**HOST**/distributorsapi/v1/subscriptions
+* Url : https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
+* Request Params Subscription_ID : the identifier of the subscription used for the creation.
 * Body payload :
 ```
 {
