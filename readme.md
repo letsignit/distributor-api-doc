@@ -1,13 +1,13 @@
-# Letsignit distributor API
+# Letsignit API distributor
 
 ## Getting started
-Before using the Letsignit distributors API you must contact your Letsignit contact, to receive an access.
+Before using the Letsignit API distributors you must contact your Letsignit representative, to receive access.
 
 **Production HOST** : api.letsignit.com
 
 With the API Distributor you can create, modify or delete a subscription on our plateform.
 
-Before making these requests you must authenticate yourself using the credentials given by your Letsignit contact.
+Before making these requests, you must authenticate yourself using the credentials given by your Letsignit representative.
 
 
 ## Authenticate
@@ -87,7 +87,7 @@ Before making these requests you must authenticate yourself using the credential
 
 **Warning : we are still working on this, cluster FR is not FR only, its a replicated worldwide.**
 
-Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Canada, and *fr* is for others country not available yet.
+Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Canada, and *fr* is for others countries not available yet.
 
 **distributor** (object) : The distributor object is explained below
 
@@ -112,7 +112,7 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
 
 **name** (string) : Distributor's name, use an explicit name
 
-**email** (string) : Distributor's email, used for support purpose
+**email** (string) : Distributor's email, used for support purposes
 
 ### **Product**
 
@@ -130,7 +130,7 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
 
 **is_bundle** (boolean) : Determine if the current product/SKU is a bundle or not.
 
-**bundle_id** (string) : Required only if is_bundle set to true.
+**bundle_id** (string) : Required only if is_bundle is set to true.
 
 ### **Plan**
 ```
@@ -186,9 +186,9 @@ The owner of the customer subscription is usually the reseller
 
 **company_name** (string) : The customer company name.
 
-**language** (string) : The language of the company, (support : fr, en, es, nl)
+**language** (string) : The language of the company, (support : fr, en)
 
-**admin_email** (string) : Customer email. That will be used to create the customer and the first administrator. Must be unique, an email canot be used twice, otherwise the purchase will fail.
+**admin_email** (string) : Customer email. That will be used to create the customer and the first administrator. Must be unique, an email cannot be used twice, otherwise the purchase will fail.
 
 ### Create successful
 
@@ -233,7 +233,7 @@ You have two types of errors returned when failed, one about the model of the bo
     "message": "Email is not available."
 }
 ```
-**code** : A code use to identify the error
+**code** : A code used to identify the error
 
 **context** : The context of the error, in your case should always be "application.subscription.errors" 
 
@@ -266,7 +266,7 @@ You have two types of errors returned when failed, one about the model of the bo
     }
 }
 ```
-To modify a subscription you have to use the same body payload you used for the creation, including the modification.
+To modify a subscription, you must use the same body payload you used for the creation, including the modification.
 
 ### Update successful
 
