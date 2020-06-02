@@ -24,6 +24,36 @@ Before making these requests you must authenticate yourself using the credential
 
 **api_key** (string) : The API key
 
+### Authentication successful
+
+* Returns status code 200
+* Returns body : 
+```
+{
+    "access_token": "token_value",
+    "token_type": "Bearer",
+    "expires_in": 86400
+}
+```
+
+**access_token** (string) : The access token to use for the provisioning requests
+
+**token_type** (string) : The token type 'Bearer'
+
+**expires_in** (int) : The token lifetime in seconds (24 hours)
+
+### Authentication failed
+
+* Returns status code 401
+* Returns body : 
+```
+{
+    "message" : "Invalid Credentials"
+}
+```
+
+**message** (string) : A message explaining the authentication fail
+
 ## Create a subscription
 * Http method : POST
 * Url : https://**HOST**/distributorsapi/v1/subscriptions
@@ -160,7 +190,56 @@ The owner of the customer subscription is usually the reseller
 
 **admin_email** (string) : Customer email. That will be used to create the customer and the first administrator. Must be unique, an email canot be used twice, otherwise the purchase will fail.
 
-## Modify a subscription
+### Create successful
+
+* Returns status code 201
+* Returns body : 
+```
+{
+    "client_id": "5ed60d2e7b9f99000799d539",
+    "id": "subscription_id"
+}
+```
+**client_id** : The identifier representing the client created on our plateform
+
+**id** : Your internal identifier used for the provisioning
+
+### Create failed
+
+You have two types of errors returned when failed, one about the model of the body and the other is about the values used.
+
+* Model error
+* Returns status code 400
+* Returns body : 
+```
+{
+    "errors": {
+        "plan": "'plan' is a required property"
+    },
+    "message": "Input payload validation failed"
+}
+```
+**errors** : The list of errors encoutered during the provisioning
+
+**message** : A global message explaining the error 
+
+* Value error
+* Returns status code 400
+* Returns body : 
+```
+{
+    "code": "0002",
+    "context": "application.subscription.errors",
+    "message": "Email is not available."
+}
+```
+**code** : A code use to identify the error
+
+**context** : The context of the error, in your case should always be "application.subscription.errors" 
+
+**message** : A message explaining the error  
+
+## Update a subscription
 * Http method : PUT
 * Url : https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
 * Request Params Subscription_ID : the identifier of the subscription used for the creation.
@@ -187,7 +266,56 @@ The owner of the customer subscription is usually the reseller
     }
 }
 ```
-To modify a subscription you have to use the same payload you used for the creation, including the modification.
+To modify a subscription you have to use the same body payload you used for the creation, including the modification.
+
+### Update successful
+
+* Returns status code 200
+* Returns body : 
+```
+{
+    "client_id": "5ed60d2e7b9f99000799d539",
+    "id": "subscription_id"
+}
+```
+**client_id** : The identifier representing the client updated on our plateform
+
+**id** : Your internal identifier used for the provisioning
+
+### Update failed
+
+You have two types of errors returned when failed, one about the body payload and the other is about the values used.
+
+* Model error
+* Returns status code 400
+* Returns body : 
+```
+{
+    "errors": {
+        "plan": "'plan' is a required property"
+    },
+    "message": "Input payload validation failed"
+}
+```
+**errors** : The list of errors encoutered during the provisioning
+
+**message** : A global message explaining the error 
+
+* Value error
+* Returns status code 400
+* Returns body : 
+```
+{
+    "code": "0002",
+    "context": "application.subscription.errors",
+    "message": "Email is not available."
+}
+```
+**code** : A code use to identify the error
+
+**context** : The context of the error, in your case should always be "application.subscription.errors" 
+
+**message** : A message explaining the error 
 
 ## Cancel a subscription
 * Http method : DELETE
