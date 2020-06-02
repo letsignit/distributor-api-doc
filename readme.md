@@ -3,7 +3,7 @@
 ## Getting started
 Before using the Letsignit API distributors you must contact your Letsignit representative, to receive access.
 
-**Production HOST** : api.letsignit.com
+**Production HOST**: api.letsignit.com
 
 With the API Distributor you can create, modify or delete a subscription on our plateform.
 
@@ -11,23 +11,25 @@ Before making these requests, you must authenticate yourself using the credentia
 
 
 ## Authenticate
-* Http method : POST
-* Url : https://**HOST**/auth/login
-* Body payload :
+* Http method: POST
+* Url: https://**HOST**/auth/login
+* Content-Type: application/json
+* Body:
 ```
 {
     "app_id":"<your_app_id>",
     "api_key":"<your_api_key>"
 }
 ```
-**app_id** (string) : The application ID
+**app_id** (string): The application ID
 
-**api_key** (string) : The API key
+**api_key** (string): The API key
 
 ### Authentication successful
 
-* Returns status code 200
-* Returns body : 
+* Status code 200
+* Content-Type: application/json
+* Body: 
 ```
 {
     "access_token": "token_value",
@@ -36,28 +38,30 @@ Before making these requests, you must authenticate yourself using the credentia
 }
 ```
 
-**access_token** (string) : The access token to use for the provisioning requests
+**access_token** (string): The access token to use for the provisioning requests
 
-**token_type** (string) : The token type 'Bearer'
+**token_type** (string): The token type 'Bearer'
 
-**expires_in** (int) : The token lifetime in seconds (24 hours)
+**expires_in** (int): The token lifetime in seconds (24 hours)
 
 ### Authentication failed
 
-* Returns status code 401
-* Returns body : 
+* Status code 401
+* Content-Type: application/json
+* Body: 
 ```
 {
-    "message" : "Invalid Credentials"
+    "message": "Invalid Credentials"
 }
 ```
 
-**message** (string) : A message explaining the authentication fail
+**message** (string): A message explaining the authentication fail
 
 ## Create a subscription
-* Http method : POST
-* Url : https://**HOST**/distributorsapi/v1/subscriptions
-* Body payload :
+* Http method: POST
+* Url: https://**HOST**/distributorsapi/v1/subscriptions
+* Content-Type: application/json
+* Body:
 ```
 {
     "id": "subscription_id",
@@ -81,23 +85,23 @@ Before making these requests, you must authenticate yourself using the credentia
 }
 ```
 
-**id** (string) : Your internal identifier representing the subscription. Must be unique.
+**id** (string): Your internal identifier representing the subscription. Must be unique.
 
-**cluster** (string) : The cluster where you want to store the data. values can be : eu, use-new, ca-new, fr.
+**cluster** (string): The cluster where you want to store the data. values can be: eu, use-new, ca-new, fr.
 
-**Warning : we are still working on this, cluster FR is not FR only, its a replicated worldwide.**
+**Warning: we are still working on this, cluster FR is not FR only, its a replicated worldwide.**
 
 Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Canada, and *fr* is for others countries not available yet.
 
-**distributor** (object) : The distributor object is explained below
+**distributor** (object): The distributor object is explained below
 
-**product** (object) : The product object is explained below
+**product** (object): The product object is explained below
 
-**plan** (object) : The plan object is explained below
+**plan** (object): The plan object is explained below
 
-**quantity** (int) : The quantity of licences
+**quantity** (int): The quantity of licences
 
-**customer** (object) : The customer object is explained below
+**customer** (object): The customer object is explained below
 
 
 ### **Distributor**
@@ -108,11 +112,11 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
     "email": "purchase@distributor.com"
 }
 ```
-**id** (string) : Your internal identifier representing the distributor. Must be unique for each distributor.
+**id** (string): Your internal identifier representing the distributor. Must be unique for each distributor.
 
-**name** (string) : Distributor's name, use an explicit name
+**name** (string): Distributor's name, use an explicit name
 
-**email** (string) : Distributor's email, used for support purposes
+**email** (string): Distributor's email, used for support purposes
 
 ### **Product**
 
@@ -124,13 +128,13 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
     "bundle_id":"bundle_id"
 }
 ```
-**id** (string) : Your internal identifier representing the product/SKU. Must be unique for each product.
+**id** (string): Your internal identifier representing the product/SKU. Must be unique for each product.
 
-**name** (string) : Your product's/SKU name
+**name** (string): Your product's/SKU name
 
-**is_bundle** (boolean) : Determine if the current product/SKU is a bundle or not.
+**is_bundle** (boolean): Determine if the current product/SKU is a bundle or not.
 
-**bundle_id** (string) : Required only if is_bundle is set to true.
+**bundle_id** (string): Required only if is_bundle is set to true.
 
 ### **Plan**
 ```
@@ -142,15 +146,15 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
     "is_nfr": true
 }
 ```
-**id** (string) : Your internal identifier representing the plan. Must be unique for each plan.
+**id** (string): Your internal identifier representing the plan. Must be unique for each plan.
 
-**name** (string) : Your plan's name, use an explicit name like 'Letsignit full', or 'Letsignit basic'
+**name** (string): Your plan's name, use an explicit name like 'Letsignit full', or 'Letsignit basic'
 
-**letsignit_plan_id** (string) : Letsignit identifier for plan, must be 'full' or 'basic'
+**letsignit_plan_id** (string): Letsignit identifier for plan, must be 'full' or 'basic'
 
-**interval** (string) : The interval for the billing, only two values authorized : 'monthly', 'annually'
+**interval** (string): The interval for the billing, only two values authorized: 'monthly', 'annually'
 
-**is_nfr** (boolean) : Determines if current provisioning is a NFR (not for resel). In this case Owner information and Customer information should be the same. (the customer is the owner)
+**is_nfr** (boolean): Determines if current provisioning is a NFR (not for resel). In this case Owner information and Customer information should be the same. (the customer is the owner)
 
 ### **Owner**
 The owner of the customer subscription is usually the reseller
@@ -163,15 +167,15 @@ The owner of the customer subscription is usually the reseller
     "email": "purchase@reseller.com"
 }
 ```
-**id** (string) : Your internal identifier representing the owner. Must be unique for each owner.
+**id** (string): Your internal identifier representing the owner. Must be unique for each owner.
 
-**admin_name** (string) : The subscription owner name, that will be shown for the customer.
+**admin_name** (string): The subscription owner name, that will be shown for the customer.
 
-**company_name** (string) : The subscription owner company name, that will be shown for the customer.
+**company_name** (string): The subscription owner company name, that will be shown for the customer.
 
-**website** (string) : The subscription owner website, that will be shown for the customer.
+**website** (string): The subscription owner website, that will be shown for the customer.
 
-**email** (string) : The subscription owner email used by Letsignit in case of support.
+**email** (string): The subscription owner email used by Letsignit in case of support.
 
 ### **Customer**
 ```
@@ -182,35 +186,37 @@ The owner of the customer subscription is usually the reseller
     "admin_email": "admin@customer.com",
 }
 ```
-**id** (string) : Your internal identifier representing the customer. Must be unique for each customer.
+**id** (string): Your internal identifier representing the customer. Must be unique for each customer.
 
-**company_name** (string) : The customer company name.
+**company_name** (string): The customer company name.
 
-**language** (string) : The language of the company, (support : fr, en)
+**language** (string): The language of the company, (support: fr, en)
 
-**admin_email** (string) : Customer email. That will be used to create the customer and the first administrator. Must be unique, an email cannot be used twice, otherwise the purchase will fail.
+**admin_email** (string): Customer email. That will be used to create the customer and the first administrator. Must be unique, an email cannot be used twice, otherwise the purchase will fail.
 
 ### Create successful
 
-* Returns status code 201
-* Returns body : 
+* Status code 201
+* Content-Type: application/json
+* Body: 
 ```
 {
     "client_id": "5ed60d2e7b9f99000799d539",
     "id": "subscription_id"
 }
 ```
-**client_id** : The identifier representing the client created on our plateform
+**client_id**: The identifier representing the client created on our plateform
 
-**id** : Your internal identifier used for the provisioning
+**id**: Your internal identifier used for the provisioning
 
 ### Create failed
 
 You have two types of errors returned when failed, one about the model of the body and the other is about the values used.
 
 * Model error
-* Returns status code 400
-* Returns body : 
+* Status code 400
+* Content-Type: application/json
+* Body: 
 ```
 {
     "errors": {
@@ -219,13 +225,14 @@ You have two types of errors returned when failed, one about the model of the bo
     "message": "Input payload validation failed"
 }
 ```
-**errors** : The list of errors encoutered during the provisioning
+**errors**: The list of errors encoutered during the provisioning
 
-**message** : A global message explaining the error 
+**message**: A global message explaining the error 
 
 * Value error
-* Returns status code 400
-* Returns body : 
+* Status code 400
+* Content-Type: application/json
+* Body:  
 ```
 {
     "code": "0002",
@@ -233,17 +240,18 @@ You have two types of errors returned when failed, one about the model of the bo
     "message": "Email is not available."
 }
 ```
-**code** : A code used to identify the error
+**code**: A code used to identify the error
 
-**context** : The context of the error, in your case should always be "application.subscription.errors" 
+**context**: The context of the error, in your case should always be "application.subscription.errors" 
 
-**message** : A message explaining the error  
+**message**: A message explaining the error  
 
 ## Update a subscription
-* Http method : PUT
-* Url : https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
-* Request Params Subscription_ID : the identifier of the subscription used for the creation.
-* Body payload :
+* Http method: PUT
+* Url: https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
+* Request Params Subscription_ID: the identifier of the subscription used for the creation.
+* Content-Type: application/json
+* Body:
 ```
 {
     "id": "subscription_id",
@@ -270,25 +278,27 @@ To modify a subscription, you must use the same body payload you used for the cr
 
 ### Update successful
 
-* Returns status code 200
-* Returns body : 
+* Status code 200
+* Content-Type: application/json
+* Body:  
 ```
 {
     "client_id": "5ed60d2e7b9f99000799d539",
     "id": "subscription_id"
 }
 ```
-**client_id** : The identifier representing the client updated on our plateform
+**client_id**: The identifier representing the client updated on our plateform
 
-**id** : Your internal identifier used for the provisioning
+**id**: Your internal identifier used for the provisioning
 
 ### Update failed
 
 You have two types of errors returned when failed, one about the body payload and the other is about the values used.
 
-* Model error
-* Returns status code 400
-* Returns body : 
+Model error:
+* Status code 400
+* Content-Type: application/json
+* Body:  
 ```
 {
     "errors": {
@@ -297,13 +307,14 @@ You have two types of errors returned when failed, one about the body payload an
     "message": "Input payload validation failed"
 }
 ```
-**errors** : The list of errors encoutered during the provisioning
+**errors**: The list of errors encoutered during the provisioning
 
-**message** : A global message explaining the error 
+**message**: A global message explaining the error 
 
-* Value error
-* Returns status code 400
-* Returns body : 
+Value error:
+* Status code 400
+* Content-Type: application/json
+* Body:  
 ```
 {
     "code": "0002",
@@ -311,13 +322,13 @@ You have two types of errors returned when failed, one about the body payload an
     "message": "Email is not available."
 }
 ```
-**code** : A code use to identify the error
+**code**: A code use to identify the error
 
-**context** : The context of the error, in your case should always be "application.subscription.errors" 
+**context**: The context of the error, in your case should always be "application.subscription.errors" 
 
-**message** : A message explaining the error 
+**message**: A message explaining the error 
 
 ## Cancel a subscription
-* Http method : DELETE
-* Url : https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
-* Request Params Subscription_ID : the identifier of the subscription used for the creation.
+* Http method: DELETE
+* Url: https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
+* Request Params Subscription_ID: the identifier of the subscription used for the creation.
