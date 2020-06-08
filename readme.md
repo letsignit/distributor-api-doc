@@ -81,7 +81,8 @@ Before making these requests, you must authenticate yourself using the credentia
     },
     "customer": {
         ...
-    }
+    },
+    "suspend": false
 }
 ```
 
@@ -101,7 +102,11 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
 
 **quantity** (int): The quantity of licences
 
+**owner** (object) : The owner object is explained below
+
 **customer** (object): The customer object is explained below
+
+**suspend** (boolean): Determines if the subscription is suspended or not.
 
 
 ### **Distributor**
@@ -271,7 +276,8 @@ You have two types of errors returned when failed, one about the model of the bo
     },
     "customer": {
         ...
-    }
+    },
+    "suspend": false
 }
 ```
 To modify a subscription, you must use the same body payload you used for the creation, including the modification.
