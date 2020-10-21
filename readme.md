@@ -195,7 +195,7 @@ The owner of the customer subscription is usually the reseller
 
 **company_name** (string): The customer company name.
 
-**language** (string): The language of the company, (support: fr, en)
+**language** (string): The language of the company, (support: fr, en, es)
 
 **admin_email** (string): Customer email. That will be used to create the customer and the first administrator. Must be unique, an email cannot be used twice, otherwise the purchase will fail.
 
