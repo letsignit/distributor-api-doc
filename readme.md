@@ -201,7 +201,7 @@ The owner of the customer subscription is usually the reseller
 
 ### Create successful
 
-* Status code 201
+* Status code 200
 * Content-Type: application/json
 * Body: 
 ```
