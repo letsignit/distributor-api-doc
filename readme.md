@@ -29,7 +29,7 @@ Before making these requests, you must authenticate yourself using the credentia
 
 * Status code 200
 * Content-Type: application/json
-* Body: 
+* Body:
 ```
 {
     "access_token": "token_value",
@@ -48,7 +48,7 @@ Before making these requests, you must authenticate yourself using the credentia
 
 * Status code 401
 * Content-Type: application/json
-* Body: 
+* Body:
 ```
 {
     "message": "Invalid Credentials"
@@ -82,6 +82,9 @@ Before making these requests, you must authenticate yourself using the credentia
     "customer": {
         ...
     },
+    "mails_configuration": {
+        ...
+    },
     "suspend": false
 }
 ```
@@ -105,6 +108,8 @@ Value *eu* is for Europe, *use-new* is for the United States, *ca-new* is for Ca
 **owner** (object) : The owner object is explained below
 
 **customer** (object): The customer object is explained below
+
+**mails_configuration** (object) : The customer mail configuration is explained below
 
 **suspend** (boolean): Determines if the subscription is suspended or not.
 
@@ -195,24 +200,43 @@ The owner of the customer subscription is usually the reseller
 
 **company_name** (string): The customer company name.
 
-**language** (string): The language of the company, (support: fr, en, es)
+**language** (string): The language of the company. (support: fr, en, es)
 
 **admin_email** (string): Customer email. That will be used to create the customer and the first administrator. Must be unique, an email cannot be used twice, otherwise the purchase will fail.
+
+### **Mails Configuration**
+
+Configure the emails sent by Letsignit. For the moment you can only handle the customer's welcome mail.
+
+```
+"mails_configuration": {
+    "welcome_mail": {
+        "to_customer": true,
+        "to_owner": true
+    }
+}
+```
+
+**welcome_mail** (object): Configure who's receiving the customer's welcome mail.
+
+**to_customer** (boolean): Determines if the customer will receive the welcome mail at the **admin_email** specified in customer object. (default behavior : **true**)
+
+**to_owner** (boolean): Determines if the owner will receive the customer's welcome mail at the **email** specified in owner object. (default behavior : **true**)
 
 ### Create successful
 
 * Status code 200
 * Content-Type: application/json
-* Body: 
+* Body:
 ```
 {
     "client_id": "5ed60d2e7b9f99000799d539",
     "id": "subscription_id"
 }
 ```
-**client_id**: The identifier representing the client created on our plateform
+**client_id**  (string): The identifier representing the client created on our plateform
 
-**id**: Your internal identifier used for the provisioning
+**id**  (string): Your internal identifier used for the provisioning
 
 ### Create failed
 
@@ -221,7 +245,7 @@ You have two types of errors returned when failed, one about the model of the bo
 * Model error
 * Status code 400
 * Content-Type: application/json
-* Body: 
+* Body:
 ```
 {
     "errors": {
@@ -230,14 +254,14 @@ You have two types of errors returned when failed, one about the model of the bo
     "message": "Input payload validation failed"
 }
 ```
-**errors**: The list of errors encoutered during the provisioning
+**errors** (object): The list of errors encoutered during the provisioning
 
-**message**: A global message explaining the error 
+**message** (string): A global message explaining the error
 
 * Value error
 * Status code 400
 * Content-Type: application/json
-* Body:  
+* Body:
 ```
 {
     "code": "0002",
@@ -245,11 +269,11 @@ You have two types of errors returned when failed, one about the model of the bo
     "message": "Email is not available."
 }
 ```
-**code**: A code used to identify the error
+**code** (string): A code used to identify the error
 
-**context**: The context of the error, in your case should always be "application.subscription.errors" 
+**context** (string): The context of the error, in your case should always be "application.subscription.errors"
 
-**message**: A message explaining the error  
+**message** (string): A message explaining the error
 
 ## Update a subscription
 * Http method: PUT
@@ -286,16 +310,16 @@ To modify a subscription, you must use the same body payload you used for the cr
 
 * Status code 200
 * Content-Type: application/json
-* Body:  
+* Body:
 ```
 {
     "client_id": "5ed60d2e7b9f99000799d539",
     "id": "subscription_id"
 }
 ```
-**client_id**: The identifier representing the client updated on our plateform
+**client_id** (string): The identifier representing the client updated on our plateform
 
-**id**: Your internal identifier used for the provisioning
+**id** (string): Your internal identifier used for the provisioning
 
 ### Update failed
 
@@ -304,7 +328,7 @@ You have two types of errors returned when failed, one about the body payload an
 Model error:
 * Status code 400
 * Content-Type: application/json
-* Body:  
+* Body:
 ```
 {
     "errors": {
@@ -313,14 +337,14 @@ Model error:
     "message": "Input payload validation failed"
 }
 ```
-**errors**: The list of errors encoutered during the provisioning
+**errors** (object): The list of errors encoutered during the provisioning
 
-**message**: A global message explaining the error 
+**message** (string): A global message explaining the error
 
 Value error:
 * Status code 400
 * Content-Type: application/json
-* Body:  
+* Body:
 ```
 {
     "code": "0002",
@@ -328,11 +352,11 @@ Value error:
     "message": "Email is not available."
 }
 ```
-**code**: A code use to identify the error
+**code** (string): A code use to identify the error
 
-**context**: The context of the error, in your case should always be "application.subscription.errors" 
+**context** (string): The context of the error, in your case should always be "application.subscription.errors"
 
-**message**: A message explaining the error 
+**message** (string): A message explaining the error
 
 ## Cancel a subscription
 * Http method: DELETE
