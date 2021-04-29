@@ -362,3 +362,109 @@ Value error:
 * Http method: DELETE
 * Url: https://**HOST**/distributorsapi/v1/subscriptions/**SUBSCRIPTION_ID**
 * Request Params Subscription_ID: the identifier of the subscription used for the creation.
+
+## List distributor's subscriptions
+* Http method: GET
+* Url: https://**HOST**/distributorsapi/v1/subscriptions/distributor/**DISTRIBUTOR_ID**?page=1&per_page=50
+* Request params Distributor_ID : the identifier of the distributor used for the creations.
+* Request params page : The page you want to retrieve, per default page one.
+* Request params per_page : The number of subscription per page you want to retrieve, per default 50 subscription.
+
+Response
+* Content-Type: application/json
+* Body:
+```
+{
+  "total_pages": 1,
+  "page": 1,
+  "per_page": 50,
+  "total": 0,
+  "objects": [
+      ...
+  ]
+}
+```
+
+**total_pages** (int): The total number of pages of subscriptions
+
+**page** (int): The page requested
+
+**per_page** (int): The number of subscription per page requested
+
+**total** (int): The total number of subscriptions
+
+**objects** (array): The subscription list in function of pagination (see below for definition)
+
+## List owner's subscriptions
+* Http method: GET
+* Url: https://**HOST**/distributorsapi/v1/subscriptions/owner/**OWNER_ID**?page=1&per_page=50
+* Request params Owner_ID : the identifier of the owner used for the creations.
+* Request params page : The page you want to retrieve, per default page one.
+* Request params per_page : The number of subscription per page you want to retrieve, per default 50 subscription.
+
+Response
+* Content-Type: application/json
+* Body:
+```
+{
+  "total_pages": 1,
+  "page": 1,
+  "per_page": 50,
+  "total": 0,
+  "objects": [
+      ...
+  ]
+}
+```
+
+**total_pages** (int): The total number of pages of subscriptions
+
+**page** (int): The page requested
+
+**per_page** (int): The number of subscription per page requested
+
+**total** (int): The total number of subscriptions
+
+**objects** (array): The subscription list in function of pagination (see below for definition)
+
+## Subscription object
+```
+{
+    "subscription_id": "subscription_id",
+    "product_id": "product_id",
+    "plan_id": "plan_id",
+    "letsignit_plan_id": "full",
+    "cluster": "eu",
+    "interval": "monthly",
+    "is_nfr": false,
+    "owner_id": "owner_id",
+    "customer_id": "customer_id",
+    "quantity": 30,
+    "suspend": false,
+    "cancelled": false
+}
+```
+
+**subscription_id** (string): The internal identifier representing the subscription.
+
+**product_id** (string): The internal identifier representing the product.
+
+**plan_id** (string): The internal identifier representing the plan.
+
+**letsignit_plan_id** (string): Letsignit identifier for plan, can be 'full' or 'basic'.
+
+**cluster** (string): The cluster where you want to store the data. values can be: eu, use-new, ca-new, fr.
+
+**interval** (string): The interval for the billing, only two values authorized: 'monthly', 'annually'.
+
+**is_nfr** (boolean): Determines if current provisioning is a NFR (not for resel). In this case Owner information and Customer information should be the same. (the customer is the owner)
+
+**owner_id** (string): The internal identifier representing the owner.
+
+**customer_id** (string): The internal identifier representing the customer.
+
+**quantity** (int): The quantity of licences.
+
+**suspend** (boolean):  Determines if the subscription is suspended or not.
+
+**cancelled** (boolean):  Determines if the subscription is cancelled or not.
